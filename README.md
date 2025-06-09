@@ -20,5 +20,10 @@ Le projet a pour objectifs de :
 ![UseCaseDiagram1](https://github.com/user-attachments/assets/86ea1366-b429-40d6-82e2-f891565ba057)
 # Daigramm class
 ![ClassDiagram1-fillRouge](https://github.com/user-attachments/assets/d97989ec-514c-4b65-83ca-cb4f20a8ce2a)
+# Diagrammes de séquence
+### Scénario 1: réservation de film par le client
+![SequenceDiagram1-Client](https://github.com/user-attachments/assets/82ee015d-1774-4139-8be5-f58032050e99)
+
+
 
 
