@@ -22,7 +22,7 @@ Le projet a pour objectifs de :
 ![ClassDiagram1-fillRouge](https://github.com/user-attachments/assets/d97989ec-514c-4b65-83ca-cb4f20a8ce2a)
 # Diagrammes de séquence
 ### Scénario 1: réservation de film par le client
-![SequenceDiagram1-Client](https://github.com/user-attachments/assets/82ee015d-1774-4139-8be5-f58032050e99)
+![SequenceDiagram3](https://github.com/user-attachments/assets/52110845-be21-4ccd-86a0-54d3a2dc20fe)
 ### Scénario 2: gestion des films par l'admin
 ![SequenceDiagram1-Admin](https://github.com/user-attachments/assets/e8f9cbaf-f5df-4b87-8b2c-7fa888a1c94f)
 
