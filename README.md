@@ -19,7 +19,7 @@ Le projet a pour objectifs de :
 # Daigramm use case
 ![UseCaseDiagram1](https://github.com/user-attachments/assets/86ea1366-b429-40d6-82e2-f891565ba057)
 # Daigramm class
-![ClassDiagram1-fillRouge](https://github.com/user-attachments/assets/d97989ec-514c-4b65-83ca-cb4f20a8ce2a)
+![ClassDiagram3](https://github.com/user-attachments/assets/f1738a9a-d6bd-4249-bc0f-a2b1e61fa006)
 # Diagrammes de séquence
 ### Scénario 1: réservation de film par le client
 ![SequenceDiagram3](https://github.com/user-attachments/assets/52110845-be21-4ccd-86a0-54d3a2dc20fe)
