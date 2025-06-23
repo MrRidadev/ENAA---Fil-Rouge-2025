@@ -1,4 +1,7 @@
 package org.example.backend.repository;
 
-public interface FilmRepository {
+import org.example.backend.entity.Film;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface FilmRepository extends JpaRepository<Film, Long> {
 }
