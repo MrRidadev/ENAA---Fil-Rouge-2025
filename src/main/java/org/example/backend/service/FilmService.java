@@ -6,6 +6,8 @@ import org.example.backend.repository.FilmRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class FilmService {
 
@@ -19,5 +21,9 @@ public class FilmService {
 
     public Film addFilm(Film film) {
         return filmRepository.save(film);
+    }
+
+    public List<Film> getAllFilms() {
+        return filmRepository.findAll();
     }
 }
