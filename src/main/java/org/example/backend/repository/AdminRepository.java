@@ -1,4 +1,7 @@
 package org.example.backend.repository;
 
-public interface AdminRepository {
+import org.example.backend.entity.Admin;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface AdminRepository extends JpaRepository<Admin, Long> {
 }
