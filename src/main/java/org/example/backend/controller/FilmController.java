@@ -29,4 +29,10 @@ public class FilmController {
     public List<Film> getAllFilms(){
         return filmService.getAllFilms();
     }
+
+    //update film
+    @PutMapping("/putFilm")
+    public Film putFilm (@RequestBody Film film){
+        return filmService.updateFilm(film);
+    }
 }
