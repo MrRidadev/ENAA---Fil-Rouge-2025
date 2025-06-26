@@ -35,4 +35,11 @@ public class FilmController {
     public Film putFilm (@RequestBody Film film){
         return filmService.updateFilm(film);
     }
+
+    // delete film by id
+    @DeleteMapping("/deleteFilm/{idFilm}")
+    public void deleteFilm (@PathVariable long idFilm){
+        filmService.deleteFilm(idFilm);
+    }
+
 }

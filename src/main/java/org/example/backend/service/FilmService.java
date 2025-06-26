@@ -30,4 +30,8 @@ public class FilmService {
     public Film updateFilm(Film film) {
         return filmRepository.save(film);
     }
+
+    public void deleteFilm(Long id) {
+        filmRepository.deleteById(id);
+    }
 }
