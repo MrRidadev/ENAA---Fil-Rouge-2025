@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
+
 
 @RestController
 @RequestMapping("/auth")
@@ -53,6 +55,42 @@ public class AuthController {
         } else {
             return ResponseEntity.badRequest().body("Rôle non reconnu.");
         }
+    }
+
+
+
+    @PutMapping("/update/{role}/{id}")
+    public ResponseEntity<?> updateUser(@PathVariable("role") Role role,
+                                        @PathVariable("id") Long id,
+                                        @RequestBody RegisterRequest request) {
+
+
+        if (role == Role.ADMIN) {
+            Optional<Admin> optionalAdmin = adminRepository.findById(id);
+            if (optionalAdmin.isPresent()) {
+                Admin admin = optionalAdmin.get();
+                admin.setNomComplet(request.getNomComplet());
+                admin.setEmail(request.getEmail());
+                admin.setModPass(request.getModPass());
+                adminRepository.save(admin);
+                return ResponseEntity.ok("Admin mis à jour.");
+            } else {
+                return ResponseEntity.notFound().build();
+            }
+        } else if (role == Role.CLIENT) {
+            Optional<Client> optionalClient = clientRepository.findById(id);
+            if (optionalClient.isPresent()) {
+                Client client = optionalClient.get();
+                client.setNomComplet(request.getNomComplet());
+                client.setEmail(request.getEmail());
+                client.setModPass(request.getModPass());
+                clientRepository.save(client);
+                return ResponseEntity.ok("Client mis à jour.");
+            } else {
+                return ResponseEntity.notFound().build();
+            }
+        }
+        return ResponseEntity.badRequest().body("Rôle non reconnu.");
     }
 
 
