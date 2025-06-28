@@ -1,5 +1,6 @@
 package org.example.backend.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -16,6 +17,7 @@ public class Film {
     private String langue;
 
     @OneToMany(mappedBy = "film")
+    @JsonManagedReference
     private List<Seance> seances;
 
     @OneToMany(mappedBy = "film")

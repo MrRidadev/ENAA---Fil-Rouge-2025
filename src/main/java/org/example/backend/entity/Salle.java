@@ -16,14 +16,6 @@ public class Salle {
     @OneToMany(mappedBy = "salle")
     private List<Seance> seances;
 
-
-    public Salle(Long id, String nom, int capacite, List<Seance> seances) {
-        this.id = id;
-        this.nom = nom;
-        this.capacite = capacite;
-        this.seances = seances;
-    }
-
     public Salle() {
         super();
 
