@@ -1,11 +1,14 @@
 package org.example.backend.controller;
 
+import org.example.backend.dto.LoginRequest;
+import org.example.backend.dto.LoginResponse;
 import org.example.backend.dto.RegisterRequest;
 import org.example.backend.entity.Admin;
 import org.example.backend.entity.Client;
 import org.example.backend.entity.Role;
 import org.example.backend.repository.AdminRepository;
 import org.example.backend.repository.ClientRepository;
+import org.example.backend.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -22,6 +25,20 @@ public class AuthController {
 
     @Autowired
     private ClientRepository clientRepository;
+
+    @Autowired
+    private AuthService authService;
+
+    @PostMapping("/login")
+    public ResponseEntity<LoginResponse> login(@RequestBody LoginRequest loginRequest) {
+        LoginResponse response = authService.login(loginRequest);
+
+        if (response.isSuccess()) {
+            return ResponseEntity.ok(response);
+        } else {
+            return ResponseEntity.badRequest().body(response);
+        }
+    }
 
     @PostMapping("/register")
     public ResponseEntity<String> register(@RequestBody RegisterRequest request) {
