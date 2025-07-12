@@ -12,7 +12,11 @@ public abstract class User {
     private String nomComplet;
     private String email;
     private String modPass;
+
+
     private Role role = Role.CLIENT;
+
+
     public Long getId() {
         return id;
     }
