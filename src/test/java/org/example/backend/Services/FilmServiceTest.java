@@ -53,5 +53,20 @@ public class FilmServiceTest {
     }
 
 
+    @Test
+    public void testDeleteFilm() {
+        Film film = new Film();
+        film.setTitre("Avatar");
+        film.setGenre("Fantasy");
+        film.setDescription("Pandora's story");
+        film.setLangue("English");
+
+        Film saved = filmService.addFilm(film);
+        Long id = saved.getIdFilm();
+
+        filmService.deleteFilm(id);
+
+        Assertions.assertFalse(filmRepository.findById(id).isPresent());
+    }
 
 }
