@@ -36,6 +36,22 @@ public class FilmServiceTest {
         Assertions.assertEquals("Inception", saved.getTitre());
     }
 
+    @Test
+    public void testUpdateFilm() {
+        Film film = new Film();
+        film.setTitre("Matrix");
+        film.setGenre("Action");
+        film.setDescription("Neo discovers reality");
+        film.setLangue("English");
+
+        Film saved = filmService.addFilm(film);
+        saved.setTitre("The Matrix Reloaded");
+
+        Film updated = filmService.updateFilm(saved);
+
+        Assertions.assertEquals("The Matrix Reloaded", updated.getTitre());
+    }
+
 
 
 }
