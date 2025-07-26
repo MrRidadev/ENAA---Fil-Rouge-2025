@@ -10,6 +10,8 @@ import org.example.backend.repository.SeanceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class SeanceService {
     @Autowired
@@ -35,5 +37,8 @@ public class SeanceService {
         seance.setSalle(salle);
 
         return seanceRepository.save(seance);
+    }
+    public List<Seance> getAllSeances() {
+        return seanceRepository.findAll();
     }
 }
