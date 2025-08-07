@@ -13,11 +13,9 @@ public class Seance {
     private String dateHeure;
 
     @ManyToOne
-    @JsonBackReference
     private Film film;
 
     @ManyToOne
-    @JsonBackReference
     private Salle salle;
 
     public Long getId() {

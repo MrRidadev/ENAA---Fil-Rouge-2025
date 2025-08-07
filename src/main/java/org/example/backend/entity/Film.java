@@ -1,5 +1,6 @@
 package org.example.backend.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
@@ -17,10 +18,10 @@ public class Film {
     private String langue;
 
     @OneToMany(mappedBy = "film")
-    @JsonManagedReference("film-seances")
+    @JsonIgnore
     private List<Seance> seances;
     @OneToMany(mappedBy = "film")
-    @JsonManagedReference("film-commentaires")
+    @JsonIgnore
     private List<Commentaire> commentaires;
 
     public Long getIdFilm() {

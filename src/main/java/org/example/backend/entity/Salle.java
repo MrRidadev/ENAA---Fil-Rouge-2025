@@ -15,7 +15,6 @@ public class Salle {
     private int capacite;
 
     @OneToMany(mappedBy = "salle")
-    @JsonBackReference("film-seances")
     private List<Seance> seances;
 
     public Salle() {
