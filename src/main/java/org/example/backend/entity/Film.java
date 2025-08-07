@@ -17,10 +17,10 @@ public class Film {
     private String langue;
 
     @OneToMany(mappedBy = "film")
-    @JsonManagedReference
+    @JsonManagedReference("film-seances")
     private List<Seance> seances;
-
     @OneToMany(mappedBy = "film")
+    @JsonManagedReference("film-commentaires")
     private List<Commentaire> commentaires;
 
     public Long getIdFilm() {
