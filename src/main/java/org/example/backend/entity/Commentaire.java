@@ -1,5 +1,6 @@
 package org.example.backend.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.Entity;
 import jakarta.persistence.*;
 
@@ -12,6 +13,7 @@ public class Commentaire {
     private String contenu;
 
     @ManyToOne
+    @JsonBackReference("film-commentaires")
     private Film film;
 
     @ManyToOne
