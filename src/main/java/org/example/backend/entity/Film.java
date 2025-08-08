@@ -16,6 +16,7 @@ public class Film {
     private String genre;
     private String description;
     private String langue;
+    private String imageUrl;
 
     @OneToMany(mappedBy = "film")
     @JsonIgnore
@@ -78,5 +79,13 @@ public class Film {
 
     public void setCommentaires(List<Commentaire> commentaires) {
         this.commentaires = commentaires;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 }
