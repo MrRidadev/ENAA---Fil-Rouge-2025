@@ -25,45 +25,16 @@ public class FilmController {
     private ImageService imageService;
 
     // Ajouter un film avec image
-    @PostMapping(value="/addFilm",consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ResponseEntity<?> addFilm(
-            @RequestParam("titre") String titre,
-            @RequestParam("genre") String genre,
-            @RequestParam("description") String description,
-            @RequestParam("langue") String langue,
-            @RequestParam(value = "image", required = false) MultipartFile image) {
-
-        try {
-            Film film = new Film();
-            film.setTitre(titre);
-            film.setGenre(genre);
-            film.setDescription(description);
-            film.setLangue(langue);
-
-            // Upload de l'image si présente
-            if (image != null && !image.isEmpty()) {
-                String imageUrl = imageService.uploadImage(image);
-                film.setImageUrl(imageUrl);
-
-            }
-
-            Film savedFilm = filmService.addFilm(film);
-
-            return ResponseEntity.ok(savedFilm);
-        } catch (IOException e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body("Erreur lors de l'upload de l'image : " + e.getMessage());
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body("Erreur lors de l'ajout du film : " + e.getMessage());
-        }
+    @PostMapping("/addFilm")
+    public Film addFilm(@RequestParam String titre,
+                        @RequestParam String genre,
+                        @RequestParam String description,
+                        @RequestParam String langue,
+                        @RequestParam("imageUrl") MultipartFile image) throws IOException {
+        return filmService.saveFilmWithImage(titre, genre, description, langue, image);
     }
 
-    // Ajouter un film sans image (JSON)
-    @PostMapping("/addFilmJson")
-    public Film addFilmJson(@RequestBody Film film) {
-        return filmService.addFilm(film);
-    }
+
 
     // Afficher la liste des films
     @GetMapping("/getAllFilm")

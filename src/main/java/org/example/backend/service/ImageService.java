@@ -21,26 +21,25 @@ public class ImageService {
         }
 
         try {
-            Map<String, Object> uploadResult = cloudinary.uploader().upload(
-                    file.getBytes(),
-                    ObjectUtils.asMap(
-                            "folder", "films",
-                            "resource_type", "image",
-                            "transformation", ObjectUtils.asMap(
-                                    "width", 300,
-                                    "height", 400,
-                                    "crop", "fill"
-                            )
-                    )
-            );
+            System.out.println("📤 Upload simple vers Cloudinary...");
+            System.out.println("Fichier: " + file.getOriginalFilename());
+            System.out.println("Taille: " + file.getSize());
 
-            return uploadResult.get("secure_url").toString();
-        } catch (IOException e) {
-            throw new IOException("Erreur lors de l'upload de l'image : " + e.getMessage(), e);
+            // Upload le plus simple possible
+            Map<String, Object> uploadResult = cloudinary.uploader().upload(file.getBytes(), ObjectUtils.emptyMap());
+
+            String secureUrl = (String) uploadResult.get("secure_url");
+            System.out.println("✅ Upload SIMPLE réussi! URL: " + secureUrl);
+            System.out.println("Résultat complet: " + uploadResult);
+
+            return secureUrl;
+
+        } catch (Exception e) {
+            System.err.println("❌ Erreur upload simple: " + e.getMessage());
+            e.printStackTrace();
+            throw new IOException("Erreur lors de l'upload simple : " + e.getMessage(), e);
         }
-    }
-
-    public void deleteImage(String imageUrl) {
+    }    public void deleteImage(String imageUrl) {
         try {
             if (imageUrl != null && !imageUrl.isEmpty()) {
                 // Extraire l'ID public de l'URL Cloudinary

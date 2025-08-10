@@ -3,13 +3,22 @@ package org.example.backend.service;
 import org.example.backend.entity.Film;
 import org.example.backend.repository.FilmRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.Optional;
 
 @Service
 public class FilmService {
+
+    @Value("${upload.directory}")
+    private String uploadDirectory;
 
     private final FilmRepository filmRepository;
 
@@ -18,7 +27,20 @@ public class FilmService {
         this.filmRepository = filmRepository;
     }
 
-    public Film addFilm(Film film) {
+    public Film saveFilmWithImage(String titre, String genre, String description, String langue, MultipartFile image) throws IOException {
+        // Sauvegarde de l'image sur le disque
+        String fileName = System.currentTimeMillis() + "_" + image.getOriginalFilename();
+        Path filePath = Paths.get(uploadDirectory, fileName);
+        Files.copy(image.getInputStream(), filePath);
+
+        // Sauvegarde du film avec chemin d'image
+        Film film = new Film();
+        film.setTitre(titre);
+        film.setGenre(genre);
+        film.setDescription(description);
+        film.setLangue(langue);
+        film.setImageUrl(fileName);
+
         return filmRepository.save(film);
     }
 
