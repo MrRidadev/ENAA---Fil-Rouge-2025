@@ -30,7 +30,7 @@ public class FilmServiceTest {
         film.setDescription("A mind-bending thriller");
         film.setLangue("English");
 
-        Film saved = filmService.addFilm(film);
+        Film saved = filmService.saveFilmWithImage(film);
 
         Assertions.assertNotNull(saved.getIdFilm());
         Assertions.assertEquals("Inception", saved.getTitre());
@@ -44,7 +44,7 @@ public class FilmServiceTest {
         film.setDescription("Neo discovers reality");
         film.setLangue("English");
 
-        Film saved = filmService.addFilm(film);
+        Film saved = filmService.saveFilmWithImage(film);
         saved.setTitre("The Matrix Reloaded");
 
         Film updated = filmService.updateFilm(saved);

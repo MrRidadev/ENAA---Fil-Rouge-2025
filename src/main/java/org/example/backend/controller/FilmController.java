@@ -26,11 +26,11 @@ public class FilmController {
 
     // Ajouter un film avec image
     @PostMapping("/addFilm")
-    public Film addFilm(@RequestParam String titre,
-                        @RequestParam String genre,
-                        @RequestParam String description,
-                        @RequestParam String langue,
-                        @RequestParam("imageUrl") MultipartFile image) throws IOException {
+    public Film addFilm(@RequestPart String titre,
+                        @RequestPart String genre,
+                        @RequestPart String description,
+                        @RequestPart String langue,
+                        @RequestPart("image_url") MultipartFile image) throws IOException {
         return filmService.saveFilmWithImage(titre, genre, description, langue, image);
     }
 

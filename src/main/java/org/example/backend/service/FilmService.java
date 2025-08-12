@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.List;
 import java.util.Optional;
 
@@ -28,12 +29,23 @@ public class FilmService {
     }
 
     public Film saveFilmWithImage(String titre, String genre, String description, String langue, MultipartFile image) throws IOException {
-        // Sauvegarde de l'image sur le disque
-        String fileName = System.currentTimeMillis() + "_" + image.getOriginalFilename();
-        Path filePath = Paths.get(uploadDirectory, fileName);
-        Files.copy(image.getInputStream(), filePath);
+        // Dossier où sauvegarder les images
+        String uploadDirectory = "uploads";
+        Path uploadPath = Paths.get(uploadDirectory);
 
-        // Sauvegarde du film avec chemin d'image
+        // Créer le dossier s'il n'existe pas
+        if (!Files.exists(uploadPath)) {
+            Files.createDirectories(uploadPath);
+        }
+
+        // Renommer le fichier pour éviter les conflits
+        String fileName = System.currentTimeMillis() + "_" + image.getOriginalFilename();
+        Path filePath = uploadPath.resolve(fileName);
+
+        // Sauvegarde de l'image sur le disque
+        Files.copy(image.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
+
+        // Sauvegarde du film avec chemin de l'image
         Film film = new Film();
         film.setTitre(titre);
         film.setGenre(genre);
@@ -43,6 +55,7 @@ public class FilmService {
 
         return filmRepository.save(film);
     }
+
 
     public List<Film> getAllFilms() {
         return filmRepository.findAll();
