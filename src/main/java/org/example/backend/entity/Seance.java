@@ -10,6 +10,7 @@ public class Seance {
     @Id
     @GeneratedValue
     private Long id;
+    private String nomSeance;
     private String dateHeure;
 
     @ManyToOne
@@ -48,5 +49,13 @@ public class Seance {
 
     public void setSalle(Salle salle) {
         this.salle = salle;
+    }
+
+    public String getNomSeance() {
+        return nomSeance;
+    }
+
+    public void setNomSeance(String nomSeance) {
+        this.nomSeance = nomSeance;
     }
 }

@@ -22,7 +22,7 @@ public class SeanceController {
     public Seance addSeance(@RequestBody SeanceRequest request) {
         return seanceService.addSeance(request.getDateHeure(), request.getFilmId(), request.getSalleId());
     }
-    @GetMapping("/getAllSSeance")
+    @GetMapping("/getAllSeance")
     public List<Seance> getAllSSeance() {
         return seanceService.getAllSeances();
     }
