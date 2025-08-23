@@ -25,7 +25,7 @@ public class SeanceService {
         this.seanceRepository = seanceRepository;
     }
 
-    public Seance addSeance(String dateHeure, Long filmId, Long salleId) {
+    public Seance addSeance(String dateHeure, Long filmId, Long salleId, String nomSeance) {
         Film film = filmRepository.findById(filmId)
                 .orElseThrow(() -> new RuntimeException("Film non trouvé : " + filmId));
         Salle salle = salleRepository.findById(salleId)

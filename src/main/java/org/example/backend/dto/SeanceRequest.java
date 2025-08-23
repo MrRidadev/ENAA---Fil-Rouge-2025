@@ -1,7 +1,7 @@
 package org.example.backend.dto;
 
 public class SeanceRequest {
-
+    private String nom_seance;
     private String dateHeure;
     private Long filmId;
     private Long salleId;
@@ -28,5 +28,12 @@ public class SeanceRequest {
 
     public void setSalleId(Long salleId) {
         this.salleId = salleId;
+    }
+
+    public String getNom_seance() {
+        return nom_seance;
+    }
+    public void setNom_seance(String nom_seance) {
+        this.nom_seance = nom_seance;
     }
 }

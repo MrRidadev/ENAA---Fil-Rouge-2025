@@ -20,7 +20,7 @@ public class SeanceController {
 
     @PostMapping("/addSeance")
     public Seance addSeance(@RequestBody SeanceRequest request) {
-        return seanceService.addSeance(request.getDateHeure(), request.getFilmId(), request.getSalleId());
+        return seanceService.addSeance(request.getDateHeure(), request.getFilmId(), request.getSalleId(),request.getNom_seance());
     }
     @GetMapping("/getAllSeance")
     public List<Seance> getAllSSeance() {
