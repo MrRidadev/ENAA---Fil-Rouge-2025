@@ -35,6 +35,7 @@ public class SeanceService {
         seance.setDateHeure(dateHeure);
         seance.setFilm(film);
         seance.setSalle(salle);
+        seance.setNomSeance(nomSeance);
 
         return seanceRepository.save(seance);
     }
