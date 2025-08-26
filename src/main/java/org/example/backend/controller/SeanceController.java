@@ -33,8 +33,9 @@ public class SeanceController {
 
     // Delete
     @DeleteMapping("/deleteSeance/{id}")
-    public void deleteSeance(@PathVariable Long id) {
+    public String deleteSeance(@PathVariable Long id) {
        seanceService.deleteSeance(id);
+       return "Seance deleted";
     }
 
 
