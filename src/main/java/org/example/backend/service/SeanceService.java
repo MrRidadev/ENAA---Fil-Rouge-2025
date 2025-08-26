@@ -42,4 +42,11 @@ public class SeanceService {
     public List<Seance> getAllSeances() {
         return seanceRepository.findAll();
     }
+
+    //  Delete Seance
+    public void deleteSeance(Long id) {
+        Seance seance = seanceRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Séance non trouvée : " + id));
+        seanceRepository.delete(seance);
+    }
 }
