@@ -49,4 +49,22 @@ public class SeanceService {
                 .orElseThrow(() -> new RuntimeException("Séance non trouvée : " + id));
         seanceRepository.delete(seance);
     }
+
+    // Update Seance
+    public Seance updateSeance(Long id, String dateHeure, Long filmId, Long salleId, String nomSeance) {
+        Seance seance = seanceRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Séance non trouvée : " + id));
+
+        Film film = filmRepository.findById(filmId)
+                .orElseThrow(() -> new RuntimeException("Film non trouvé : " + filmId));
+        Salle salle = salleRepository.findById(salleId)
+                .orElseThrow(() -> new RuntimeException("Salle non trouvée : " + salleId));
+
+        seance.setDateHeure(dateHeure);
+        seance.setFilm(film);
+        seance.setSalle(salle);
+        seance.setNomSeance(nomSeance);
+
+        return seanceRepository.save(seance);
+    }
 }

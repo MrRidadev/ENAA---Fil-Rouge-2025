@@ -37,4 +37,17 @@ public class SeanceController {
        seanceService.deleteSeance(id);
     }
 
+
+    // Update
+    @PutMapping("/updateSeance/{id}")
+    public Seance updateSeance(@PathVariable Long id, @RequestBody SeanceRequest request) {
+        return seanceService.updateSeance(
+                id,
+                request.getDateHeure(),
+                request.getFilmId(),
+                request.getSalleId(),
+                request.getNom_seance()
+        );
+    }
+
 }
