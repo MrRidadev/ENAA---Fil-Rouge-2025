@@ -8,12 +8,10 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
 
-
-
-
-@SpringBootTest
-@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.ANY)
+@SpringBootTest(properties = {"upload.directory=C:/temp/uploads"})@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.ANY)
+@Transactional
 public class FilmServiceTest {
 
     @Autowired
@@ -23,50 +21,66 @@ public class FilmServiceTest {
     private FilmRepository filmRepository;
 
     @Test
-    public void testAddAndGetFilm() {
+    public void testAddAndGetFilm() throws Exception {
         Film film = new Film();
         film.setTitre("Inception");
         film.setGenre("Sci-fi");
         film.setDescription("A mind-bending thriller");
         film.setLangue("English");
 
-        Film saved = filmService.saveFilmWithImage(film);
+        Film saved = filmService.saveFilmWithImage(
+                film.getTitre(),
+                film.getGenre(),
+                film.getDescription(),
+                film.getLangue(),
+                null
+        );
 
         Assertions.assertNotNull(saved.getIdFilm());
         Assertions.assertEquals("Inception", saved.getTitre());
     }
 
+
     @Test
-    public void testUpdateFilm() {
-        Film film = new Film();
-        film.setTitre("Matrix");
-        film.setGenre("Action");
-        film.setDescription("Neo discovers reality");
-        film.setLangue("English");
+    public void testUpdateFilm() throws Exception {
+        // Sauvegarde initiale
+        Film saved = filmService.saveFilmWithImage(
+                "Matrix",
+                "Action",
+                "Neo discovers reality",
+                "English",
+                null
+        );
 
-        Film saved = filmService.saveFilmWithImage(film);
-        saved.setTitre("The Matrix Reloaded");
-
-        Film updated = filmService.updateFilm(saved);
+        // Mise à jour
+        Film updated = filmService.updateFilmWithImage(
+                saved.getIdFilm(),
+                "The Matrix Reloaded",
+                saved.getGenre(),
+                saved.getDescription(),
+                saved.getLangue(),
+                null
+        );
 
         Assertions.assertEquals("The Matrix Reloaded", updated.getTitre());
     }
 
 
     @Test
-    public void testDeleteFilm() {
-        Film film = new Film();
-        film.setTitre("Avatar");
-        film.setGenre("Fantasy");
-        film.setDescription("Pandora's story");
-        film.setLangue("English");
+    public void testDeleteFilm() throws Exception {
+        Film saved = filmService.saveFilmWithImage(
+                "Avatar",
+                "Fantasy",
+                "Pandora's story",
+                "English",
+                null
+        );
 
-        Film saved = filmService.addFilm(film);
         Long id = saved.getIdFilm();
-
         filmService.deleteFilm(id);
 
         Assertions.assertFalse(filmRepository.findById(id).isPresent());
     }
+
 
 }
