@@ -20,14 +20,16 @@ import java.util.Optional;
 @RequestMapping("/auth")
 public class AuthController {
 
-    @Autowired
+
     private AdminRepository adminRepository;
-
-    @Autowired
     private ClientRepository clientRepository;
-
-    @Autowired
     private AuthService authService;
+
+    public AuthController(AdminRepository adminRepository, ClientRepository clientRepository, AuthService authService) {
+        this.adminRepository = adminRepository;
+        this.clientRepository = clientRepository;
+        this.authService = authService;
+    }
 
     @PostMapping("/login")
     public ResponseEntity<LoginResponse> login(@RequestBody LoginRequest loginRequest) {
@@ -39,7 +41,7 @@ public class AuthController {
             return ResponseEntity.badRequest().body(response);
         }
     }
-
+    
     @PostMapping("/register")
     public ResponseEntity<String> register(@RequestBody RegisterRequest request) {
         if (request.getRole() == Role.ADMIN) {
