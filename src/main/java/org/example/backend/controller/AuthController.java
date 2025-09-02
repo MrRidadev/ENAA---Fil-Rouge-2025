@@ -13,6 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 
 
@@ -20,14 +22,16 @@ import java.util.Optional;
 @RequestMapping("/auth")
 public class AuthController {
 
-    @Autowired
+
     private AdminRepository adminRepository;
-
-    @Autowired
     private ClientRepository clientRepository;
-
-    @Autowired
     private AuthService authService;
+
+    public AuthController(AdminRepository adminRepository, ClientRepository clientRepository, AuthService authService) {
+        this.adminRepository = adminRepository;
+        this.clientRepository = clientRepository;
+        this.authService = authService;
+    }
 
     @PostMapping("/login")
     public ResponseEntity<LoginResponse> login(@RequestBody LoginRequest loginRequest) {
@@ -41,7 +45,8 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<String> register(@RequestBody RegisterRequest request) {
+    public ResponseEntity<Map<String, Object>> register(@RequestBody RegisterRequest request) {
+        Map<String, Object> response = new HashMap<>();
         if (request.getRole() == Role.ADMIN) {
             Admin admin = new Admin();
             admin.setNomComplet(request.getNomComplet());
@@ -49,7 +54,9 @@ public class AuthController {
             admin.setModPass(request.getModPass());
             admin.setRole(Role.ADMIN);
             adminRepository.save(admin);
-            return ResponseEntity.ok("Admin enregistré avec succès.");
+            response.put("message", "Admin enregistré avec succès.");
+            response.put("success", true);
+            return ResponseEntity.ok(response);
         } else if (request.getRole() == Role.CLIENT) {
             Client client = new Client();
             client.setNomComplet(request.getNomComplet());
@@ -57,11 +64,16 @@ public class AuthController {
             client.setModPass(request.getModPass());
             client.setRole(Role.CLIENT);
             clientRepository.save(client);
-            return ResponseEntity.ok("Client enregistré avec succès.");
+            response.put("message", "Client enregistré avec succès.");
+            response.put("success", true);
+            return ResponseEntity.ok(response);
         } else {
-            return ResponseEntity.badRequest().body("Rôle non reconnu !");
+            response.put("message", "Rôle non reconnu !");
+            response.put("success", false);
+            return ResponseEntity.badRequest().body(response);
         }
     }
+
 
     @GetMapping("/all/{role}")
     public ResponseEntity<?> getAllUsers(@PathVariable("role") Role role) {

@@ -67,4 +67,9 @@ public class SeanceService {
 
         return seanceRepository.save(seance);
     }
+
+    // count Seance
+//    public int countSeances(String titre) {
+//       return seanceRepository.countSeance(titre);
+//    }
 }

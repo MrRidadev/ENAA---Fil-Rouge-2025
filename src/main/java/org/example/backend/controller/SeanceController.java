@@ -4,19 +4,19 @@ import org.example.backend.dto.SeanceRequest;
 import org.example.backend.entity.Seance;
 import org.example.backend.repository.SeanceRepository;
 import org.example.backend.service.SeanceService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/seance")
-@CrossOrigin(origins = "http://localhost:4200")
 public class SeanceController {
     private SeanceRepository seanceRepository;
-    @Autowired
+
     private SeanceService seanceService;
-    public SeanceController(SeanceService seanceService) {
+
+    public SeanceController(SeanceRepository seanceRepository, SeanceService seanceService) {
+        this.seanceRepository = seanceRepository;
         this.seanceService = seanceService;
     }
 
@@ -50,5 +50,11 @@ public class SeanceController {
                 request.getNom_seance()
         );
     }
+
+    // count seance
+//    @GetMapping("/count/{titre}")
+//    public int countSeance(@PathVariable String titre) {
+//        return seanceService.countSeances(titre);
+//    }
 
 }
