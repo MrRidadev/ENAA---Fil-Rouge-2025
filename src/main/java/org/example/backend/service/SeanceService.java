@@ -69,7 +69,7 @@ public class SeanceService {
     }
 
     // count Seance
-    public int countSeances(String titre) {
-       return seanceRepository.countSeance(titre);
-    }
+//    public int countSeances(String titre) {
+//       return seanceRepository.countSeance(titre);
+//    }
 }
