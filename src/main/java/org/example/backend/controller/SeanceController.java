@@ -51,4 +51,10 @@ public class SeanceController {
         );
     }
 
+    // count seance
+    @GetMapping("/count/{titre}")
+    public int countSeance(@PathVariable String titre) {
+        return seanceService.countSeances(titre);
+    }
+
 }
