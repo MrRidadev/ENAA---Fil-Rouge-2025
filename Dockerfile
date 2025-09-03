@@ -1,9 +1,8 @@
 FROM openjdk:17-jdk-slim
 
-WORKDIR /app
 
-COPY target/*.jar app.jar
+ADD target/*.jar Backend-0.0.1-SNAPSHOT.jar
 
 EXPOSE 8087
 
-CMD ["java", "-jar", "app.jar"]
+CMD ["java", "-jar", "Backend-0.0.1-SNAPSHOT.jar"]
