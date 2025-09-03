@@ -46,7 +46,7 @@ public class SalleServiceTest {
 
         List<Salle> salles = salleService.getAllSalles();
 
-        Assertions.assertEquals(2, salles.size());
+        Assertions.assertEquals(3, salles.size());
     }
 
 }
