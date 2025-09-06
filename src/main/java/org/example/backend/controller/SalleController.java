@@ -27,4 +27,9 @@ public class SalleController {
     public List<Salle> getAll() {
         return salleService.getAllSalles(); 
     }
+
+    @DeleteMapping("/delete/{id}")
+    public void deleteSalle(@PathVariable Long id) {
+        salleService.deleteSalle(id);
+    }
 }

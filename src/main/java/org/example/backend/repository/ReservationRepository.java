@@ -25,4 +25,8 @@ public interface ReservationRepository extends JpaRepository<Reservation, Long> 
     // Vérifier si une place est déjà réservée pour une séance
     @Query("SELECT COUNT(r) FROM Reservation r WHERE r.seance.id = :seanceId AND r.numPlace = :numPlace")
     int countBySeanceIdAndNumPlace(@Param("seanceId") Long seanceId, @Param("numPlace") int numPlace);
+
+    // compter toutes les réservations
+    @Query("SELECT COUNT(r) FROM Reservation r")
+    long countAllReservations();
 }
