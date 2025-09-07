@@ -150,7 +150,7 @@ public class ReservationService {
         return dto;
     }
 
-    public long countReservations() {
+    public int countReservations() {
         return reservationRepository.countAllReservations();
     }
 }

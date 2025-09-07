@@ -28,5 +28,5 @@ public interface ReservationRepository extends JpaRepository<Reservation, Long> 
 
     // compter toutes les réservations
     @Query("SELECT COUNT(r) FROM Reservation r")
-    long countAllReservations();
+    int countAllReservations();
 }

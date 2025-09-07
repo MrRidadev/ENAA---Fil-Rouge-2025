@@ -34,6 +34,11 @@ public class ReservationController {
         return ResponseEntity.ok(reservations);
     }
 
+    @GetMapping("/count")
+    public int countReservations() {
+        return reservationService.countReservations();
+    }
+
     // Obtenir une réservation par ID
     @GetMapping("/{id}")
     public ResponseEntity<?> getReservationById(@PathVariable Long id) {
@@ -94,8 +99,5 @@ public class ReservationController {
         }
     }
 
-    @GetMapping("/count")
-    public long countReservations() {
-        return reservationService.countReservations();
-    }
+
 }
