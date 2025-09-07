@@ -93,4 +93,9 @@ public class ReservationController {
             return ResponseEntity.badRequest().body(false);
         }
     }
+
+    @GetMapping("/count")
+    public long countReservations() {
+        return reservationService.countReservations();
+    }
 }

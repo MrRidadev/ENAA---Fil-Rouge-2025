@@ -23,4 +23,7 @@ public class SalleService {
     public List<Salle> getAllSalles() {
         return salleRepository.findAll();
     }
+    public void deleteSalle(Long id) {
+        salleRepository.deleteById(id);
+    }
 }

@@ -28,7 +28,7 @@ public class SecurityConfig {
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
                         // Routes publiques (pas besoin d'authentification)
-                        .requestMatchers("/auth/**").permitAll()
+                        .requestMatchers("/auth/**","/reservation/count").permitAll()
                         .requestMatchers("/film/getAllFilm").permitAll()
                         .requestMatchers("/seance/getAllSeance").permitAll()
                         .requestMatchers("/salle/getAll").permitAll()
@@ -36,7 +36,7 @@ public class SecurityConfig {
                         // Routes protégées pour les admins
                         .requestMatchers("/film/addFilm", "/film/updateWithImage/**", "/film/delete/**").hasRole("ADMIN")
                         .requestMatchers("/seance/addSeance", "/seance/updateSeance/**", "/seance/deleteSeance/**").hasRole("ADMIN")
-                        .requestMatchers("/salle/addSalle").hasRole("ADMIN")
+                        .requestMatchers("/salle/addSalle","/salle/delete/**").hasRole("ADMIN")
                         .requestMatchers("/auth/all/**", "/auth/update/**").hasRole("ADMIN")
 
                         // Routes protégées pour les clients
