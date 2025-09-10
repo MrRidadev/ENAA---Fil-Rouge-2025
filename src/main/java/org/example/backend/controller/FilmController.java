@@ -75,4 +75,10 @@ public class FilmController {
         }
     }
 
+    // get count film
+    @GetMapping("/countFilm")
+    public int countFilm(){
+        return filmService.countFilm();
+    }
+
 }

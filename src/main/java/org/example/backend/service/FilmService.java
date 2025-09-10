@@ -129,5 +129,10 @@ public class FilmService {
         }
     }
 
+    // count film
+    public int countFilm(){
+        return filmRepository.countFilms();
+    }
+
 
 }
