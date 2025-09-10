@@ -26,4 +26,9 @@ public class SalleService {
     public void deleteSalle(Long id) {
         salleRepository.deleteById(id);
     }
+
+    // count film
+    public int countSalles() {
+        return salleRepository.countSalles();
+    }
 }

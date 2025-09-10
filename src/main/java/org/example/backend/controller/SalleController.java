@@ -3,7 +3,6 @@ package org.example.backend.controller;
 
 import org.example.backend.entity.Salle;
 import org.example.backend.service.SalleService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -13,10 +12,11 @@ import java.util.List;
 public class SalleController {
 
 
-    @Autowired
+
     private SalleService salleService;
-
-
+    public SalleController(SalleService salleService) {
+        this.salleService = salleService;
+    }
 
     @PostMapping("/addSalle")
     public Salle addSalle(@RequestBody Salle salle) {
@@ -31,5 +31,11 @@ public class SalleController {
     @DeleteMapping("/delete/{id}")
     public void deleteSalle(@PathVariable Long id) {
         salleService.deleteSalle(id);
+    }
+
+    // count salle
+    @GetMapping("/countSalle")
+    public int countSalle() {
+        return salleService.countSalles();
     }
 }
