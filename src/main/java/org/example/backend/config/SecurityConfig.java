@@ -28,6 +28,12 @@ public class SecurityConfig {
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
                         // Routes publiques (pas besoin d'authentification)
+                        .requestMatchers(
+                                "/swagger-ui/**",
+                                "/v3/api-docs/**",
+                                "/swagger-resources/**",
+                                "/swagger-ui.html"
+                        ).permitAll()
                         .requestMatchers("/auth/**","/reservation/count").permitAll()
                         .requestMatchers("/film/getAllFilm").permitAll()
                         .requestMatchers("/seance/getAllSeance").permitAll()

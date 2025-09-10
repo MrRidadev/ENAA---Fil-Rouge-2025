@@ -1,6 +1,7 @@
 package org.example.backend.controller;
 
 import org.example.backend.entity.Film;
+import org.example.backend.repository.FilmRepository;
 import org.example.backend.service.FilmService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,6 +18,8 @@ public class FilmController {
 
     @Autowired
     private FilmService filmService;
+    @Autowired
+    private FilmRepository filmRepository;
 
 
     // Ajouter un film avec image
@@ -74,5 +77,23 @@ public class FilmController {
                     .body("Erreur lors de la suppression du film : " + e.getMessage());
         }
     }
+
+    // get count film
+    @GetMapping("/countFilm")
+    public int countFilm(){
+        return filmService.countFilm();
+    }
+
+    // recherche pare title
+    @GetMapping("/searchByTitre")
+    List<Film> rechercherByTitre(@RequestParam String titre){
+          return filmRepository.findFilmByTitre(titre);
+    }
+
+    @GetMapping("/searchByGenre")
+    public List<Film> searchByGenre(@RequestParam String genre) {
+        return filmRepository.findByGenre(genre);
+    }
+
 
 }
